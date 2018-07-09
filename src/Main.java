@@ -6,7 +6,7 @@ public class Main
 	{
 		Calculator calc = new Calculator();
 		
-		System.out.println(calc.calculate("test"));
+		System.out.println(calc.calculate("pointless string that will eventually be erased"));
 	}
 
 }
