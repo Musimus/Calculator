@@ -6,7 +6,7 @@ public class Main
 	{
 		Calculator calc = new Calculator();
 		
-		System.out.println(calc.calculate("4+ 5"));
+		System.out.println(calc.calculate("test"));
 	}
 
 }
