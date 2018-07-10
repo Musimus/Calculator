@@ -1,73 +1,58 @@
-import java.util.Arrays;
-import java.util.Scanner;
+
+
 
 public class Calculator {
-	String userInput = null;
 
-	public String calculate(String tempNumToDelete){
-		userInput = askForUserInput();
-		stringSplitter(userInput);
+	Debugger debugger = new Debugger();
+	
 
-		return "answer :)";
+
+	public int calculate(String userInput){
 		
+		int number1 = 0;
+		int number2 = 0;
+		int answer = 0;
+		char symbol = 0;
+		for(int i = 0; i < userInput.length(); i++){
+			char charToTest = userInput.charAt(i);
+			if(isDigit(charToTest) && symbol == 0)
+				number1 = number1 * 10 + getDigit(charToTest);
+			else if(symbol == 0 && !isDigit(charToTest))
+				symbol = charToTest;
+			else if(isDigit(charToTest))
+				number2 = number2 * 10 + getDigit(charToTest);
+		}
+		if(symbol == '+')
+			answer = number1 + number2;
+		if(symbol == '-')
+			answer = number1 - number2; 
+		
+		return answer;
+		
+	}
+
+	private boolean isDigit(char charToTest) {
+		return charToTest >= '0' && charToTest <= '9';
+	}
+	private int getDigit(char charToConvert) {
+		return charToConvert - '0';
 	}
 	
-	public String askForUserInput() {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("What would you like to calculate?");
-		userInput = scanner.nextLine();
-		scanner.close();
-		return userInput;
-		
-	}
-	public void stringSplitter(String userInput) {
-		boolean[] charListBooleans = new boolean[userInput.length()];
-		Arrays.fill(charListBooleans, Boolean.FALSE);
-		int charAmount = userInput.length();
-		for(int i = 0; i < charAmount; i++) {
-			if(testForNumber(userInput.charAt(i))) {
-				charListBooleans[i] = true;
-			}
-			
-		}
-		testToCheckBooleans(charListBooleans);
-	}
-	public boolean testForNumber(char charToTest) {
-		boolean charIsNum = false;
-		switch(charToTest) {
-			case 1 :
-			case 2 :
-			case 3 :
-			case 4 :
-			case 5 :
-			case 6 :
-			case 7 : 
-			case 8 :
-			case 9 :
-			case 0 :
-				charIsNum = true; 
-				break;
-			default : 
-				break;
-		}
-		
-		return charIsNum;
-	}
-	public void testToCheckBooleans(boolean[] testarray) {
-		for(int i = 0; i < testarray.length; i++) {
-			if(testarray[i])
-				System.out.println(i + "space is true");
-			else
-				System.out.println(i + "space is false");
-		}
-	}
 }
 
-/*
-
-
-My switch statement is not working and i need to fix it
-
-
-
-*/
+/*TODO
+      12 + 17 + 4
+ * 
+ * 
+ * 
+ * 	public boolean[] booleanGenerator(String userInput) {
+		boolean[] charListBooleans = new boolean[userInput.length()];
+		Arrays.fill(charListBooleans, Boolean.FALSE);
+		for(int i = 0; i < userInput.length(); i++) {
+			if(isDigit(userInput.charAt(i)))
+				charListBooleans[i] = true;
+		}
+		debugger.testBooleans(charListBooleans);
+		return charListBooleans;
+	}
+ */

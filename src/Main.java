@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Main 
 {
@@ -6,7 +7,16 @@ public class Main
 	{
 		Calculator calc = new Calculator();
 		
-		System.out.println(calc.calculate("pointless string that will eventually be erased"));
+		System.out.println(calc.calculate(askForUserInput()));
+	}
+	
+	public static String askForUserInput() {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("What would you like to calculate?");
+		String userInput = scanner.nextLine();
+		scanner.close();
+		return userInput;
+		
 	}
 
 }
