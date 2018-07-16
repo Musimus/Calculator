@@ -12,7 +12,7 @@ public class Main
 	
 	public static String askForUserInput() {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("What would you like to calculate?");
+		System.out.println("UserInput: ");
 		String userInput = scanner.nextLine();
 		scanner.close();
 		return userInput;

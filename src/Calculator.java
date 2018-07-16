@@ -3,16 +3,69 @@
 
 public class Calculator {
 
-	Debugger debugger = new Debugger();
+	private int newNumber = 0;
+	private int answer = 0;
+	private char symbol = '0';
 	
 
 
-	public int calculate(String userInput){
+	public String calculate(String userInput){
+		boolean reachedSymbol = false;
+		boolean firstNumGenerated = false;
+		char charToTest = '0';
+		for(int i = 0; i < userInput.length(); i++) {
+			charToTest = userInput.charAt(i);
+			if(charToTest == ' ');
+			else if(isDigit(charToTest) && !firstNumGenerated)
+				answer = answer * 10 + getDigit(charToTest);
+			
+			else if(!isDigit(charToTest) && !reachedSymbol) {
+				reachedSymbol = true;
+				firstNumGenerated = true;
+				symbol = charToTest;
+			}
+			else if(isDigit(charToTest) && reachedSymbol)
+				newNumber = newNumber * 10 + getDigit(charToTest);
+			else if(!isDigit(charToTest) && reachedSymbol) {
+				doTheMath();
+				newNumber = 0;
+				symbol = charToTest;
+			}
+
+			
+			
+		}
+		doTheMath();
+		return "The answer is: " + answer;
 		
-		int number1 = 0;
+		
+	}
+
+	private boolean isDigit(char charToTest) {
+		return charToTest >= '0' && charToTest <= '9';
+	}
+	private int getDigit(char charToConvert) {
+		return charToConvert - '0';
+	}
+	private void doTheMath() {
+//		System.out.println(newNumber);
+//		System.out.println(answer);
+		if(symbol == '+')
+			answer = answer + newNumber;
+		if(symbol == '-')
+			answer = answer - newNumber;
+	}
+	
+}
+
+/*TODO
+      12 + 17 + 4 + 10 
+      
+      	int number1 = 0;
 		int number2 = 0;
 		int answer = 0;
 		char symbol = 0;
+		
 		for(int i = 0; i < userInput.length(); i++){
 			char charToTest = userInput.charAt(i);
 			if(isDigit(charToTest) && symbol == 0)
@@ -27,32 +80,4 @@ public class Calculator {
 		if(symbol == '-')
 			answer = number1 - number2; 
 		
-		return answer;
-		
-	}
-
-	private boolean isDigit(char charToTest) {
-		return charToTest >= '0' && charToTest <= '9';
-	}
-	private int getDigit(char charToConvert) {
-		return charToConvert - '0';
-	}
-	
-}
-
-/*TODO
-      12 + 17 + 4
- * 
- * 
- * 
- * 	public boolean[] booleanGenerator(String userInput) {
-		boolean[] charListBooleans = new boolean[userInput.length()];
-		Arrays.fill(charListBooleans, Boolean.FALSE);
-		for(int i = 0; i < userInput.length(); i++) {
-			if(isDigit(userInput.charAt(i)))
-				charListBooleans[i] = true;
-		}
-		debugger.testBooleans(charListBooleans);
-		return charListBooleans;
-	}
  */
