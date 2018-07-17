@@ -6,6 +6,8 @@ public class Calculator {
 	private int newNumber = 0;
 	private int answer = 0;
 	private char symbol = '0';
+	private boolean answerIsNeg = false;
+	private boolean newNumberIsNeg = false;
 	
 
 
@@ -16,6 +18,8 @@ public class Calculator {
 		for(int i = 0; i < userInput.length(); i++) {
 			charToTest = userInput.charAt(i);
 			if(charToTest == ' ');
+			else if(charToTest == '-' && !firstNumGenerated && answer == 0)
+				answerIsNeg = true;
 			else if(isDigit(charToTest) && !firstNumGenerated)
 				answer = answer * 10 + getDigit(charToTest);
 			
@@ -48,12 +52,21 @@ public class Calculator {
 		return charToConvert - '0';
 	}
 	private void doTheMath() {
-//		System.out.println(newNumber);
-//		System.out.println(answer);
+//		System.out.println("First Number: " +answer );
+//		System.out.println("Second Number: " +newNumber );
+		
+		if(answerIsNeg)
+			answer = 0 - answer;
+		if(newNumberIsNeg)
+			newNumber = 0 - newNumber;
+		
 		if(symbol == '+')
 			answer = answer + newNumber;
 		if(symbol == '-')
 			answer = answer - newNumber;
+		
+		
+		
 	}
 	
 }
